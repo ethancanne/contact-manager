@@ -1,9 +1,13 @@
 const express = require('express')
+const connectDb = require('./config/db')
 const app = express()
 
-app.use('/api/users', require('./routes/user'))
-app.use('/api/auth', require('./routes/auth'))
-app.use('/api/contacts', require('./routes/contacts'))
+app.use(express.json({extended: false}))
+
+connectDb()
+
+app.use('/users', require('./routes/users'))
+app.use('/contacts', require('./routes/contacts'))
 
 const port = process.env.PORT || 5000
 
